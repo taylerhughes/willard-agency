@@ -1,65 +1,68 @@
-import Image from "next/image";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import AboutSection from "@/components/AboutSection";
+import WorkSection from "@/components/WorkSection";
+import ServicesSection from "@/components/ServicesSection";
+import TestimonialSection from "@/components/TestimonialSection";
+import TickerCTA from "@/components/TickerCTA";
+import BlogSection from "@/components/BlogSection";
+import AiSection from "@/components/AiSection";
+import Footer from "@/components/Footer";
+import Button from "@/components/Button";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      <Header />
+      <main>
+        <Hero />
+        <AboutSection />
+        <WorkSection />
+        <ServicesSection />
+        <TestimonialSection />
+
+        {/* Sharing the love / About copy */}
+        <section className="px-2 sm:px-6 xl:px-12 2xl:px-20 pb-20 lg:pb-24">
+          <div className="px-2 lg:px-3 xl:px-4 w-full flex flex-wrap items-start justify-between relative z-10">
+            <div className="w-full flex flex-wrap lg:mb-0 lg:w-9/16">
+              <div>
+                <div className="inline-flex items-center space-x-2 w-auto mb-3">
+                  <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+                  <div className="font-light text-sm lg:text-base text-gray-600">
+                    Sharing the love
+                  </div>
+                </div>
+                <h2 className="text-2xl md:text-3xl xl:text-4xl tracking-tight text-gray-600 leading-none mb-3 text-balance lg:pr-16">
+                  A web design agency that cares about you and your brand, no
+                  matter the size or what industry your business is in.
+                </h2>
+              </div>
+            </div>
+            <div className="w-full lg:w-7/16">
+              <div className="w-full relative mb-10 xl:pr-10">
+                <p className="text-base xl:text-lg text-gray-400 font-light leading-7 mb-6">
+                  Willard is a digital agency with expertise in web design,
+                  branding, eCommerce, and SEO. We help businesses grow their
+                  online presence with thoughtful design and strategic thinking.
+                </p>
+                <p className="text-base xl:text-lg text-gray-400 font-light leading-7 mb-6">
+                  Whether you need a complete rebrand, a new website, or help
+                  with your digital marketing strategy, we have the experience
+                  and passion to deliver results that matter.
+                </p>
+              </div>
+              <Button href="/about" variant="primary">
+                About Willard
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        <TickerCTA />
+        <BlogSection />
+        <AiSection />
       </main>
-    </div>
+      <Footer />
+    </>
   );
 }
