@@ -26,8 +26,7 @@ export default function Home() {
           <div className="px-2 lg:px-3 xl:px-4 w-full flex flex-wrap items-start justify-between relative z-10">
             <div className="w-full flex flex-wrap lg:mb-0 lg:w-9/16">
               <div>
-                <div className="inline-flex items-center space-x-2 w-auto mb-3">
-                  <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+                <div className="inline-flex items-center w-auto mb-3">
                   <div className="font-light text-sm lg:text-base text-gray-600">
                     Sharing the love
                   </div>

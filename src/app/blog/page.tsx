@@ -20,8 +20,7 @@ export default function BlogPage() {
           <div className="px-2 sm:px-6 xl:px-12 2xl:px-20">
             <div className="w-full flex flex-wrap justify-between">
               <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-5/16">
-                <div className="inline-flex items-center space-x-2 mb-4">
-                  <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+                <div className="inline-flex items-center mb-4">
                   <div className="font-light text-sm lg:text-base text-gray-600">
                     Blog
                   </div>
@@ -73,8 +72,7 @@ export default function BlogPage() {
                   </div>
 
                   {/* Meta */}
-                  <div className="inline-flex items-center space-x-2 mb-1">
-                    <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+                  <div className="inline-flex items-center mb-1">
                     <div className="font-light text-sm lg:text-base text-gray-600">
                       {post.readTime}
                     </div>

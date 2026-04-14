@@ -1,3 +1,7 @@
+"use client";
+
+import { useCallback, useRef } from "react";
+
 const WILLARD_QUERY = encodeURIComponent(
   "As a Marketing Director/Business Owner, I want to know what makes Willard the best partner for reinventing our brand or scaling our Website and SEO, and why their approach consistently delivers professional results. Summarise the highlights from Willard's website: https://willard.agency"
 );
@@ -41,21 +45,38 @@ const AI_LINKS = [
   },
 ];
 
-/** Scattered placeholder image */
+const SCATTERED_IMAGES = [
+  "/images/aboutus/photo-1603201667493-4c2696de0b1f.avif",
+  "/images/aboutus/photo-1603201667246-3c45012c6d17.avif",
+  "/images/aboutus/photo-1603202662706-62ead3176b8f.avif",
+  "/images/aboutus/photo-1603201667141-5a2d4c673378.avif",
+  "/images/aboutus/photo-1603201667106-0e3e0ae584c5.avif",
+  "/images/aboutus/photo-1603195827187-459ab02554a0.avif",
+];
+
 function ScatteredImage({
   className,
-  gradient = "from-gray-200 to-gray-100",
+  src,
   aspect = "66.75%",
+  innerRef,
 }: {
   className: string;
-  gradient?: string;
+  src: string;
   aspect?: string;
+  innerRef?: React.RefObject<HTMLDivElement | null>;
 }) {
   return (
     <div className={`absolute transform pointer-events-none inline-flex ${className}`}>
-      <div className="w-full overflow-hidden relative rounded-xl bg-gray-50 lg:rounded-2xl">
-        <div className="relative overflow-hidden w-full" style={{ paddingTop: aspect }}>
-          <div className={`absolute inset-0 bg-gradient-to-br ${gradient}`} />
+      <div ref={innerRef} className="w-full transition-transform duration-100 ease-out will-change-transform">
+        <div className="w-full overflow-hidden relative rounded-xl lg:rounded-2xl">
+          <div className="relative overflow-hidden w-full" style={{ paddingTop: aspect }}>
+            <img
+              src={src}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -63,42 +84,75 @@ function ScatteredImage({
 }
 
 export default function AiSection() {
+  const img0 = useRef<HTMLDivElement>(null);
+  const img1 = useRef<HTMLDivElement>(null);
+  const img2 = useRef<HTMLDivElement>(null);
+  const img3 = useRef<HTMLDivElement>(null);
+  const img4 = useRef<HTMLDivElement>(null);
+  const img5 = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    const cx = e.clientX - window.innerWidth / 2;
+    const cy = e.clientY - window.innerHeight / 2;
+    const factor = 0.02;
+
+    // Alternate directions for depth
+    [img0, img2, img4].forEach((ref) => {
+      if (ref.current) {
+        ref.current.style.transform = `translate(${cx * factor}px, ${cy * factor}px)`;
+      }
+    });
+    [img1, img3, img5].forEach((ref) => {
+      if (ref.current) {
+        ref.current.style.transform = `translate(${cx * -factor}px, ${cy * -factor}px)`;
+      }
+    });
+  }, []);
+
   return (
     <div className="w-full pb-20 lg:pb-24 2xl:pb-32">
       <div className="px-0">
-        <div className="w-full h-[70vh] lg:h-[60vh] relative flex flex-wrap justify-center">
+        <div
+          className="w-full h-[70vh] lg:h-[60vh] relative flex flex-wrap justify-center"
+          onMouseMove={handleMouseMove}
+        >
           {/* Scattered background images */}
           <ScatteredImage
             className="top-2/3 -left-10 w-24 md:w-40 2xl:w-60"
-            gradient="from-gray-300 to-gray-200"
+            src={SCATTERED_IMAGES[0]}
+            innerRef={img0}
           />
           <ScatteredImage
             className="left-4 top-10 lg:top-20 lg:left-20 w-20 md:w-56 2xl:w-80"
-            gradient="from-gray-200 to-gray-100"
+            src={SCATTERED_IMAGES[1]}
+            innerRef={img1}
           />
           <ScatteredImage
             className="bottom-0 left-1/3 hidden lg:flex w-14 lg:w-24 2xl:w-40"
-            gradient="from-gray-300 to-gray-200"
+            src={SCATTERED_IMAGES[2]}
+            innerRef={img2}
           />
           <ScatteredImage
             className="bottom-10 right-1/3 lg:right-40 lg:top-0 w-32 md:w-40 2xl:w-60"
-            gradient="from-gray-200 to-gray-100"
+            src={SCATTERED_IMAGES[3]}
+            innerRef={img3}
           />
           <ScatteredImage
             className="right-4 bottom-0 lg:right-10 lg:bottom-0 w-20 md:w-40"
-            gradient="from-gray-300 to-gray-100"
+            src={SCATTERED_IMAGES[4]}
+            innerRef={img4}
           />
           <ScatteredImage
             className="right-4 -top-8 lg:top-auto lg:right-60 lg:bottom-20 w-20 md:w-28"
-            gradient="from-gray-200 to-gray-100"
+            src={SCATTERED_IMAGES[5]}
             aspect="150%"
+            innerRef={img5}
           />
 
           {/* Centered content */}
           <div className="px-2 lg:px-3 xl:px-4 w-full h-full flex flex-col space-y-6 justify-center items-center text-center">
             <div className="flex flex-col space-y-3 lg:space-y-5 items-center text-center">
-              <div className="inline-flex items-center space-x-2">
-                <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+              <div className="inline-flex items-center">
                 <div className="font-light text-sm lg:text-base text-gray-600">
                   Don&apos;t believe the hype?
                 </div>

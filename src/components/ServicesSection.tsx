@@ -23,8 +23,7 @@ export default function ServicesSection() {
             {/* Header */}
             <div className="w-full flex flex-wrap justify-between mb-10 lg:mb-20">
               <div className="px-2 lg:px-3 xl:px-4 w-full mb-2 lg:mb-0 lg:w-5/16">
-                <div className="inline-flex items-center space-x-2">
-                  <div className="bg-white w-1.5 h-1.5 rounded-full" />
+                <div className="inline-flex items-center">
                   <div className="font-light text-sm lg:text-base text-white">
                     Our Expertise
                   </div>

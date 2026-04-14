@@ -120,8 +120,7 @@ function FeaturedWorkCarousel({
           {/* Left header */}
           <div className="px-2 lg:px-3 xl:px-4 inline-flex flex-row items-end justify-between w-full mb-10 md:pr-6 lg:pr-0 lg:flex-col lg:items-start lg:justify-between lg:w-4/16 lg:mb-0">
             <div className="flex flex-col space-y-3 lg:space-y-5 items-start">
-              <div className="inline-flex items-center space-x-2">
-                <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+              <div className="inline-flex items-center">
                 <div className="font-light text-sm lg:text-base text-gray-600">
                   Our Work
                 </div>
@@ -232,8 +231,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
           <div className="w-full flex flex-wrap justify-between">
             {/* Left — label + capabilities */}
             <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-5/16 mb-8 lg:mb-0">
-              <div className="inline-flex items-center space-x-2 mb-4">
-                <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+              <div className="inline-flex items-center mb-4">
                 <div className="font-light text-sm lg:text-base text-gray-600">
                   {service.label}
                 </div>
@@ -312,8 +310,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
       <section className="px-2 sm:px-6 xl:px-12 2xl:px-20 pb-20 lg:pb-24">
         <div className="w-full flex flex-wrap justify-between">
           <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-5/16 mb-8 lg:mb-0">
-            <div className="inline-flex items-center space-x-2 mb-4">
-              <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+            <div className="inline-flex items-center mb-4">
               <div className="font-light text-sm lg:text-base text-gray-600">
                 Why Willard
               </div>
@@ -354,8 +351,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
       <section className="px-2 sm:px-6 xl:px-12 2xl:px-20 pb-20 lg:pb-24">
         <div className="w-full flex flex-wrap justify-between">
           <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-5/16 mb-8 lg:mb-0">
-            <div className="inline-flex items-center space-x-2 mb-4">
-              <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+            <div className="inline-flex items-center mb-4">
               <div className="font-light text-sm lg:text-base text-gray-600">
                 The team
               </div>
@@ -409,8 +405,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
               <div className="w-full flex flex-wrap justify-between items-end mb-8 mt-10 lg:mt-0 lg:mb-16">
                 <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-auto">
                   <div className="flex flex-col space-y-3 lg:space-y-5 items-start">
-                    <div className="inline-flex items-center space-x-2">
-                      <div className="bg-white w-1.5 h-1.5 rounded-full" />
+                    <div className="inline-flex items-center">
                       <div className="font-light text-sm lg:text-base text-white">
                         {service.subServicesLabel}
                       </div>
@@ -461,8 +456,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
       <section className="px-2 sm:px-6 xl:px-12 2xl:px-20 py-20 lg:py-24 2xl:py-32">
         <div className="w-full flex flex-wrap justify-between items-end">
           <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-9/16 mb-6 lg:mb-0">
-            <div className="inline-flex items-center space-x-2 mb-4">
-              <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+            <div className="inline-flex items-center mb-4">
               <div className="font-light text-sm lg:text-base text-gray-600">
                 Shameful plug
               </div>
@@ -490,8 +484,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
               <div className="px-2 lg:px-3 xl:px-4 w-full mb-10 lg:mb-0 lg:w-5/16">
                 <div className="w-full lg:sticky lg:top-32 lg:left-0">
                   <div className="flex flex-col space-y-3 lg:space-y-5 items-start">
-                    <div className="inline-flex items-center space-x-2">
-                      <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+                    <div className="inline-flex items-center">
                       <div className="font-light text-sm lg:text-base text-gray-600">
                         FAQs
                       </div>

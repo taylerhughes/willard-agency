@@ -57,8 +57,7 @@ export default function AboutPage() {
           <div className="px-2 sm:px-6 xl:px-12 2xl:px-20">
             <div className="w-full flex flex-wrap justify-between">
               <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-5/16 mb-4 lg:mb-0">
-                <div className="inline-flex items-center space-x-2 mb-4">
-                  <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+                <div className="inline-flex items-center mb-4">
                   <div className="font-light text-sm lg:text-base text-gray-600">
                     About us
                   </div>
@@ -90,8 +89,7 @@ export default function AboutPage() {
         <section className="px-2 sm:px-6 xl:px-12 2xl:px-20 pb-20 lg:pb-24">
           <div className="w-full flex flex-wrap justify-between">
             <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-5/16 mb-6 lg:mb-0">
-              <div className="inline-flex items-center space-x-2 mb-4">
-                <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+              <div className="inline-flex items-center mb-4">
                 <div className="font-light text-sm lg:text-base text-gray-600">
                   Who we are
                 </div>
@@ -127,8 +125,7 @@ export default function AboutPage() {
         <section className="px-2 sm:px-6 xl:px-12 2xl:px-20 pb-20 lg:pb-24 2xl:pb-32">
           <div className="w-full flex flex-wrap justify-between">
             <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-5/16 mb-8 lg:mb-0">
-              <div className="inline-flex items-center space-x-2 mb-4">
-                <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+              <div className="inline-flex items-center mb-4">
                 <div className="font-light text-sm lg:text-base text-gray-600">
                   Our Team
                 </div>
@@ -174,8 +171,7 @@ export default function AboutPage() {
               <div className="px-2 sm:px-6 xl:px-12 2xl:px-20">
                 <div className="w-full flex flex-wrap justify-between items-end mb-10 lg:mb-16">
                   <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-auto">
-                    <div className="inline-flex items-center space-x-2 mb-4">
-                      <div className="bg-white w-1.5 h-1.5 rounded-full" />
+                    <div className="inline-flex items-center mb-4">
                       <div className="font-light text-sm lg:text-base text-white">
                         By the numbers
                       </div>
@@ -223,8 +219,7 @@ export default function AboutPage() {
             <div className="px-2 lg:px-3 xl:px-4 w-full mb-10 lg:mb-0 lg:w-5/16">
               <div className="w-full lg:sticky lg:top-32 lg:left-0">
                 <div className="flex flex-col space-y-3 lg:space-y-5 items-start">
-                  <div className="inline-flex items-center space-x-2">
-                    <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+                  <div className="inline-flex items-center">
                     <div className="font-light text-sm lg:text-base text-gray-600">
                       Our values
                     </div>
@@ -289,8 +284,7 @@ export default function AboutPage() {
         <section className="px-2 sm:px-6 xl:px-12 2xl:px-20 pb-20 lg:pb-24 2xl:pb-32">
           <div className="w-full flex flex-wrap justify-between items-end">
             <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-9/16 mb-6 lg:mb-0">
-              <div className="inline-flex items-center space-x-2 mb-4">
-                <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+              <div className="inline-flex items-center mb-4">
                 <div className="font-light text-sm lg:text-base text-gray-600">
                   Shameful plug
                 </div>

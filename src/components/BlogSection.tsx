@@ -61,8 +61,7 @@ function BlogCard({ post }: { post: BlogPost }) {
         </div>
 
         {/* Meta */}
-        <div className="inline-flex items-center space-x-2 mb-1">
-          <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+        <div className="inline-flex items-center mb-1">
           <div className="font-light text-sm lg:text-base text-gray-600">
             {post.readTime}
           </div>
@@ -114,8 +113,7 @@ export default function BlogSection() {
           {/* Left header */}
           <div className="px-2 lg:px-3 xl:px-4 inline-flex flex-row items-end justify-between w-full mb-10 md:pr-6 lg:pr-0 lg:flex-col lg:items-start lg:justify-between lg:w-4/16 lg:mb-0">
             <div className="flex flex-col space-y-3 lg:space-y-5 items-start">
-              <div className="inline-flex items-center space-x-2">
-                <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+              <div className="inline-flex items-center">
                 <div className="font-light text-sm lg:text-base text-gray-600">
                   Blog
                 </div>

@@ -109,8 +109,7 @@ export default function FAQSection() {
           <div className="px-2 lg:px-3 xl:px-4 w-full mb-10 lg:mb-0 lg:w-5/16 xl:w-5/16">
             <div className="w-full lg:sticky lg:top-32 lg:left-0">
               <div className="flex flex-col space-y-3 lg:space-y-5 items-start">
-                <div className="inline-flex items-center space-x-2">
-                  <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+                <div className="inline-flex items-center">
                   <div className="font-light text-sm lg:text-base text-gray-600">
                     Anything else?
                   </div>

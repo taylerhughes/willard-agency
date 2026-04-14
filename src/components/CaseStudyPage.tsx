@@ -23,8 +23,7 @@ function TextBlock({
       <div className="px-2 sm:px-6 xl:px-12 2xl:px-20">
         <div className="w-full flex flex-wrap justify-between">
           <div className="px-2 lg:px-3 xl:px-4 relative w-full mb-5 lg:mb-0 lg:w-6/16 xl:w-7/16">
-            <div className="inline-flex items-center space-x-2 w-auto mb-3 xl:mb-0 xl:absolute xl:top-3 xl:left-4">
-              <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+            <div className="inline-flex items-center w-auto mb-3 xl:mb-0 xl:absolute xl:top-3 xl:left-4">
               <div className="font-light text-sm lg:text-base text-gray-600">
                 {label}
               </div>
@@ -203,8 +202,7 @@ function MoreWorkCarousel({ projects }: { projects: RelatedProject[] }) {
       <div className="px-2 sm:px-6 xl:px-12 2xl:px-20 w-full flex flex-wrap justify-between items-end mb-10">
         <div className="px-2 lg:px-3 xl:px-4 w-14/16 lg:w-auto">
           <div className="flex flex-col space-y-3 lg:space-y-5 items-start">
-            <div className="inline-flex items-center space-x-2">
-              <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+            <div className="inline-flex items-center">
               <div className="font-light text-sm lg:text-base text-gray-600">
                 More good stuff
               </div>

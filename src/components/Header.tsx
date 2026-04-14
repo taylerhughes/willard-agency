@@ -150,8 +150,7 @@ export default function Header() {
             style={{ height: mobileMenuOpen ? "27.5rem" : 0 }}
           >
             <div className="w-full px-2 pt-8 pb-3">
-              <div className="inline-flex items-center space-x-2 mb-4">
-                <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+              <div className="inline-flex items-center mb-4">
                 <div className="font-light text-sm text-gray-600">
                   Have a look around...
                 </div>
