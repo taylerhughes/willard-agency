@@ -77,11 +77,11 @@ export default function Hero() {
               {/* Headline with gooey filter for smooth rounded corners */}
               <div className="w-auto relative">
                 {/* Corner: top-right of headline area */}
-                <CornerTL className="w-9 h-9 lg:w-10 lg:h-10 text-white z-30 absolute -mt-px top-0.5 right-px transform -translate-y-10 translate-x-full" />
+                <CornerTL className="w-9 h-9 lg:w-10 lg:h-10 text-white z-30 absolute -mt-px -top-px right-px transform -translate-y-full translate-x-full" />
 
                 <div className="w-auto relative">
                   <div className="relative">
-                    <h1 className="text-3xl sm:text-5xl md:text-6xl xl:text-7xl 2xl:text-8xl leading-none tracking-tight text-gray-600 bg-white pt-16 pb-3 gooey-content">
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl 2xl:text-8xl leading-none tracking-tight text-gray-600 bg-white pt-16 pb-3 gooey-content">
                       <span className="flex-shrink-0 truncate inline relative pl-3 lg:pl-5" style={{ zIndex: 2 }}>
                         A web design and&nbsp;&nbsp;
                         <br />
@@ -118,7 +118,7 @@ export default function Hero() {
               {/* CTA buttons row */}
               <div className="relative bg-white rounded-b-xl pr-3 pl-3 pb-3 mt-2.5 pt-1 inline-flex lg:rounded-b-2xl lg:pt-3 lg:mt-0 lg:pr-8 lg:pl-5 lg:pb-5">
                 {/* Corner: top-right of CTA row */}
-                <CornerTL className="w-10 h-10 text-white z-30 absolute top-1 -mt-px -ml-px right-px transform translate-x-full lg:top-4 xl:top-[1.125rem]" />
+                <CornerTL className="w-10 h-10 text-white z-30 absolute -top-px -mt-px -ml-px right-px transform translate-x-full" />
 
                 {/* Corner: bottom-left of CTA row (mobile only) */}
                 <CornerTL className="w-10 h-10 text-white z-40 absolute bottom-px -ml-px left-3 transform translate-y-full lg:hidden" />

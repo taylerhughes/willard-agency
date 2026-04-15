@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: "Willard | Web Design & Branding Agency",
   description:
     "An award-winning web design and branding agency specialising in Web Design, Branding, eCommerce and SEO.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
