@@ -1,3 +1,4 @@
+import { getBlogSectionPosts } from "@/lib/blog";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ALL_SERVICES } from "@/content/services";
@@ -44,7 +45,7 @@ export default async function IndividualServicePage({
       <Header />
       <ServicePage service={service} />
       <TestimonialSection />
-      <BlogSection />
+      <BlogSection posts={getBlogSectionPosts()} />
       <TickerCTA />
       <Footer />
     </>

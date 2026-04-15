@@ -4,46 +4,16 @@ import { useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import Button from "./Button";
 
-interface BlogPost {
+export interface BlogSectionPost {
   title: string;
   readTime: string;
   excerpt: string;
   href: string;
   gradient: string;
+  image?: string;
 }
 
-const POSTS: BlogPost[] = [
-  {
-    title: "Why we chose to stay small as a web design agency",
-    readTime: "10 min read",
-    excerpt: "Co-Founder explains why we haven't turned our digital agency of 10 staff into 30.",
-    href: "/blog/staying-small",
-    gradient: "from-gray-500 to-gray-400",
-  },
-  {
-    title: "Our culture, our values & our studio",
-    readTime: "6 min read",
-    excerpt: "In our own words, how important culture, values and studio environment is to us.",
-    href: "/blog/culture",
-    gradient: "from-gray-400 to-gray-300",
-  },
-  {
-    title: "Types of clients we want to work with",
-    readTime: "6 min read",
-    excerpt: "Here's a list of the types of clients we want to work with and why.",
-    href: "/blog/ideal-clients",
-    gradient: "from-primary-700 to-primary-500",
-  },
-  {
-    title: "Why our studio location works for us",
-    readTime: "4 min read",
-    excerpt: "Why we chose our studio location and how it benefits our work and our clients.",
-    href: "/blog/studio-location",
-    gradient: "from-gray-600 to-gray-500",
-  },
-];
-
-function BlogCard({ post }: { post: BlogPost }) {
+function BlogCard({ post }: { post: BlogSectionPost }) {
   return (
     <div className="w-full">
       <Link href={post.href} className="flex flex-col items-start group">
@@ -53,7 +23,11 @@ function BlogCard({ post }: { post: BlogPost }) {
             <div className="w-full relative z-10 rounded-2xl overflow-hidden bg-gray-50 lg:rounded-3xl">
               <div className="w-full transform scale-110 transition-transform xl:group-hover:-translate-y-2.5">
                 <div className="relative overflow-hidden w-full" style={{ paddingTop: "56.25%" }}>
-                  <div className={`absolute inset-0 bg-gradient-to-br ${post.gradient}`} />
+                  {post.image ? (
+                    <img src={post.image} alt={post.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                  ) : (
+                    <div className={`absolute inset-0 bg-gradient-to-br ${post.gradient}`} />
+                  )}
                 </div>
               </div>
             </div>
@@ -81,7 +55,7 @@ function BlogCard({ post }: { post: BlogPost }) {
   );
 }
 
-export default function BlogSection() {
+export default function BlogSection({ posts }: { posts: BlogSectionPost[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -139,7 +113,7 @@ export default function BlogSection() {
               onMouseLeave={handleMouseUp}
             >
               <div className="flex gap-4 lg:gap-6 pr-4 sm:pr-6 xl:pr-12 2xl:pr-20">
-                {POSTS.map((post) => (
+                {posts.map((post) => (
                   <div
                     key={post.title}
                     className={`flex-shrink-0 w-[75vw] sm:w-[55vw] lg:w-[35vw] xl:w-[30vw] ${isDragging ? "pointer-events-none" : ""}`}

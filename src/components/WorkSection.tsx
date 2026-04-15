@@ -13,40 +13,25 @@ interface Project {
 
 const PROJECTS_LEFT: Project[] = [
   {
-    year: "2024",
-    client: "Meridian",
-    title: "Refreshing a global brand's digital presence",
-    tags: ["Branding", "Website", "SEO"],
-    image: "from-gray-500 to-gray-400",
-    video: "/videos/0325(3) (1080p).mp4",
-    href: "/work/meridian",
-  },
-  {
-    year: "2023",
-    client: "Atelier Studios",
-    title: "A workplace consultancy creating inspiring environments",
-    tags: ["Website", "SEO", "Brand Repositioning"],
-    image: "from-gray-400 to-gray-300",
-    href: "/work/atelier",
+    year: "2025",
+    client: "Fireside",
+    title: "Building a community dentists actually want to join",
+    tags: ["Web Design", "Development", "Motion Design"],
+    image: "from-orange-100 to-amber-50",
+    video: "/videos/fireside/fireside_landing_01.mp4",
+    href: "/work/fireside",
   },
 ];
 
 const PROJECTS_RIGHT: Project[] = [
   {
     year: "2024",
-    client: "Northfield",
-    title: "Furniture designed to the greatest extent",
-    tags: ["Shopify", "Website"],
-    image: "from-primary-700 to-primary-500",
-    href: "/work/northfield",
-  },
-  {
-    year: "2024",
-    client: "Volta Group",
-    title: "Redefining a leading global talent group",
-    tags: ["Website"],
-    image: "from-gray-600 to-gray-500",
-    href: "/work/volta",
+    client: "MOVA",
+    title: "Translating a brewery's soul into a digital experience",
+    tags: ["Branding", "eCommerce", "Motion Design"],
+    image: "from-amber-950 to-amber-900",
+    video: "/videos/mova/mova_home_1.mp4",
+    href: "/work/harvest",
   },
 ];
 

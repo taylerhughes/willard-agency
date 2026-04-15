@@ -1,3 +1,4 @@
+import { getBlogSectionPosts } from "@/lib/blog";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
@@ -58,7 +59,7 @@ export default function Home() {
         </section>
 
         <TickerCTA />
-        <BlogSection />
+        <BlogSection posts={getBlogSectionPosts()} />
         <AiSection />
       </main>
       <Footer />

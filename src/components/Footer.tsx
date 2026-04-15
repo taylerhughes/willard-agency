@@ -116,7 +116,7 @@ export default function Footer() {
             className="inline-flex items-center space-x-1 font-light group transition-none pt-3 pb-1.5 lg:pt-1.5 lg:pb-3"
           >
             <span className="text-xs lg:text-base">
-              Sh*t I&apos;ve gone too far, send me back up
+              I&apos;ve gone too far, send me back up
             </span>
             <span className="animate-bounce">👆</span>
           </button>

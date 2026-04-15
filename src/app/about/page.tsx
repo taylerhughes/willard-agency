@@ -1,12 +1,13 @@
-"use client";
-
-import { useState } from "react";
+import { getBlogSectionPosts } from "@/lib/blog";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TickerCTA from "@/components/TickerCTA";
 import Button from "@/components/Button";
 import TestimonialSection from "@/components/TestimonialSection";
 import BlogSection from "@/components/BlogSection";
+import ValuesAccordion from "@/components/ValuesAccordion";
+import AboutHero from "@/components/AboutHero";
+import LogoCarousel from "@/components/LogoCarousel";
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -25,6 +26,17 @@ const TEAM = [
   { name: "Avery Chen", role: "Motion Designer", initials: "AV", color: "bg-primary-500" },
 ];
 
+const AWARDS = [
+  { name: "CSS Design Awards", type: "Site of the Day", year: "2024" },
+  { name: "Awwwards", type: "Honorable Mention", year: "2024" },
+  { name: "CSS Design Awards", type: "UI Design Award", year: "2023" },
+  { name: "Awwwards", type: "Mobile Excellence", year: "2023" },
+  { name: "CSS Design Awards", type: "UX Design Award", year: "2023" },
+  { name: "Awwwards", type: "Honorable Mention", year: "2022" },
+  { name: "CSS Design Awards", type: "Special Kudos", year: "2022" },
+  { name: "Awwwards", type: "Mobile Excellence", year: "2021" },
+];
+
 const STATS = [
   { number: "120+", label: "Clients", description: "Businesses we've partnered with since day one." },
   { number: "94%", label: "Referrals", description: "Of our clients come through word of mouth." },
@@ -32,61 +44,25 @@ const STATS = [
   { number: "12", label: "Years", description: "Crafting digital experiences since 2012." },
 ];
 
-const VALUES = [
-  { title: "Craft over quantity", body: "We'd rather do fewer things brilliantly than many things averagely. Every project gets our full attention." },
-  { title: "Honest by default", body: "We tell you what you need to hear, not what you want to hear. It's how we build trust." },
-  { title: "Collaboration first", body: "We work with you, not for you. The best results come from genuine partnership." },
-  { title: "Always learning", body: "The web moves fast. We stay curious, experiment constantly, and bring fresh thinking to every brief." },
-];
-
 /* ------------------------------------------------------------------ */
 /*  Page                                                               */
 /* ------------------------------------------------------------------ */
 
 export default function AboutPage() {
-  const [activeValue, setActiveValue] = useState<number | null>(null);
 
   return (
     <>
       <Header />
       <main>
         {/* ========================================================== */}
-        {/*  HERO                                                      */}
+        {/*  HERO — arched image carousel                              */}
         {/* ========================================================== */}
-        <section className="w-full pt-28 pb-16 lg:pt-40 lg:pb-24 xl:pt-48">
-          <div className="px-2 sm:px-6 xl:px-12 2xl:px-20">
-            <div className="w-full flex flex-wrap justify-between">
-              <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-5/16 mb-4 lg:mb-0">
-                <div className="inline-flex items-center mb-4">
-                  <div className="font-light text-sm lg:text-base text-gray-600">
-                    About us
-                  </div>
-                </div>
-              </div>
-              <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-11/16">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl 2xl:text-7xl leading-none tracking-tight text-gray-600 mb-8 text-balance lg:indent-48">
-                  Good design makes life better.
-                </h1>
-                <div className="flex flex-wrap items-start justify-between gap-8 lg:pl-48">
-                  <p className="text-base xl:text-lg text-gray-400 font-light leading-7 max-w-lg">
-                    We&apos;re a digital agency with expertise in web design,
-                    branding, eCommerce, and SEO. We help businesses grow their
-                    online presence with thoughtful design and strategic
-                    thinking.
-                  </p>
-                  <Button href="/contact" variant="primary">
-                    Start a project
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <AboutHero />
 
         {/* ========================================================== */}
         {/*  ABOUT COPY                                                */}
         {/* ========================================================== */}
-        <section className="px-2 sm:px-6 xl:px-12 2xl:px-20 pb-20 lg:pb-24">
+        <section id="about-content" className="px-2 sm:px-6 xl:px-12 2xl:px-20 pb-20 lg:pb-24">
           <div className="w-full flex flex-wrap justify-between">
             <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-5/16 mb-6 lg:mb-0">
               <div className="inline-flex items-center mb-4">
@@ -117,6 +93,13 @@ export default function AboutPage() {
               </Button>
             </div>
           </div>
+        </section>
+
+        {/* ========================================================== */}
+        {/*  CLIENT LOGO BAR                                           */}
+        {/* ========================================================== */}
+        <section className="pb-10 lg:pb-16">
+          <LogoCarousel />
         </section>
 
         {/* ========================================================== */}
@@ -231,46 +214,119 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-10/16 xl:w-9/16">
-              {VALUES.map((value, i) => (
+              <ValuesAccordion />
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================== */}
+        {/*  CULTURE QUOTE                                             */}
+        {/* ========================================================== */}
+        <section className="px-2 sm:px-6 xl:px-12 2xl:px-20 pb-20 lg:pb-24 2xl:pb-32">
+          <div className="w-full flex flex-col lg:flex-row lg:justify-between">
+            {/* Image */}
+            <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-8/16 mb-10 lg:mb-0">
+              <div className="w-full relative aspect-square md:aspect-video lg:aspect-auto lg:h-full">
+                <div className="w-full h-full rounded-2xl lg:rounded-3xl bg-gray-100 overflow-hidden" />
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-8/16 flex items-center">
+              <div className="w-full space-y-8 lg:max-w-xl xl:max-w-2xl">
+                <div className="flex flex-col space-y-3 lg:space-y-5 items-start">
+                  <div className="inline-flex items-center">
+                    <div className="font-light text-sm lg:text-base text-gray-600">
+                      Our Culture
+                    </div>
+                  </div>
+                  <h2 className="text-xl md:text-2xl xl:text-3xl tracking-tight text-gray-600 leading-none text-balance">
+                    We&apos;ve created an environment where everyone feels
+                    comfortable and open, but we can have a laugh along the way.
+                  </h2>
+                </div>
+
+                <p className="text-base xl:text-lg text-gray-400 font-light leading-7">
+                  We produce good work for good people, with the belief that happy
+                  teams and happy clients lead to the best outcomes. That energy
+                  comes back around &mdash; whether through referrals or long-term
+                  partnerships.
+                </p>
+
+                {/* Quote card */}
+                <div className="w-full bg-primary-500 rounded-2xl p-6 relative">
+                  <svg
+                    className="text-gray-600 fill-current w-5 h-5 mb-3 opacity-30"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 17 11"
+                  >
+                    <path d="M0 6.646C0 3.107 2.531 1.002 4.11.032c.2-.123.416.133.262.312A8.202 8.202 0 002.92 2.777 4.023 4.023 0 110 6.647zm8.955 0c0-3.539 2.531-5.644 4.11-6.613.2-.123.416.132.263.31a8.202 8.202 0 00-1.454 2.434 4.023 4.023 0 11-2.92 3.87z" />
+                  </svg>
+                  <p className="text-lg md:text-xl xl:text-2xl tracking-tight text-gray-600 leading-tight">
+                    My vision has always been to look after the clients we work
+                    with, but to also look after the team just as much. That will
+                    get the best results for everyone.
+                  </p>
+                  <div className="flex items-center gap-3 mt-5">
+                    <div className="w-9 h-9 lg:w-11 lg:h-11 rounded-lg bg-gray-600 flex items-center justify-center text-white text-sm">
+                      AC
+                    </div>
+                    <div className="leading-tight">
+                      <div className="text-sm text-gray-600">Alex Carter</div>
+                      <div className="text-xs text-gray-400 font-light">
+                        Co-Founder
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <Button href="/about" variant="dark">
+                  Learn about our culture
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================== */}
+        {/*  AWARDS / RECOGNITION                                      */}
+        {/* ========================================================== */}
+        <section className="px-2 sm:px-6 xl:px-12 2xl:px-20 pb-20 lg:pb-24 2xl:pb-32">
+          <div className="w-full flex flex-wrap justify-between items-end mb-10">
+            <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-auto">
+              <div className="inline-flex items-center mb-4">
+                <div className="font-light text-sm lg:text-base text-gray-600">
+                  We don&apos;t pay for awards
+                </div>
+              </div>
+              <h2 className="text-2xl md:text-3xl xl:text-4xl tracking-tight text-gray-600 leading-none text-balance max-w-md xl:max-w-2xl">
+                We win awards and get recognised for our work.
+              </h2>
+            </div>
+            <div className="px-2 lg:px-3 xl:px-4 mt-4 lg:mt-0">
+              <Button href="/contact" variant="primary">
+                You could be next
+              </Button>
+            </div>
+          </div>
+
+          <div className="w-full overflow-x-auto scrollbar-hide -mx-2 px-2">
+            <div className="flex gap-4 lg:gap-6 w-max lg:w-full lg:flex-wrap lg:grid lg:grid-cols-4">
+              {AWARDS.map((award, i) => (
                 <div
-                  key={value.title}
-                  className="w-full rounded-2xl bg-gray-50 mb-4 lg:rounded-3xl"
+                  key={i}
+                  className="flex-shrink-0 w-56 lg:w-auto bg-gray-600 rounded-2xl lg:rounded-3xl p-6 lg:p-8 flex flex-col justify-between min-h-[200px]"
                 >
-                  <button
-                    className="flex justify-between items-center text-left cursor-pointer w-full p-6 focus:outline-none"
-                    onClick={() =>
-                      setActiveValue(activeValue === i ? null : i)
-                    }
-                  >
-                    <h3 className="text-lg tracking-tight text-gray-600 leading-tight text-balance pr-10">
-                      {value.title}
-                    </h3>
-                    <div
-                      className={`flex-shrink-0 w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center transition-transform duration-300 ${
-                        activeValue === i ? "rotate-180" : ""
-                      }`}
-                    >
-                      <svg
-                        className="w-3 h-3 text-white fill-current"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 384 512"
-                      >
-                        <path d="M328 96h24v288h-48V177.9L81 401l-17 17-33.9-34 17-17 223-223H64V96h264z" />
-                      </svg>
+                  <div>
+                    <div className="text-xs text-gray-200 font-light mb-1">
+                      {award.year}
                     </div>
-                  </button>
-                  <div
-                    className={`overflow-hidden transition-all duration-300 ${
-                      activeValue === i
-                        ? "max-h-96 opacity-100"
-                        : "max-h-0 opacity-0"
-                    }`}
-                  >
-                    <div className="w-full pl-6 pb-6 pr-6 lg:pr-28">
-                      <p className="text-base text-gray-400 font-light leading-7">
-                        {value.body}
-                      </p>
+                    <div className="text-white text-base lg:text-lg tracking-tight leading-tight mb-2">
+                      {award.name}
                     </div>
+                  </div>
+                  <div className="text-primary-500 text-sm font-light">
+                    {award.type}
                   </div>
                 </div>
               ))}
@@ -305,7 +361,7 @@ export default function AboutPage() {
         {/* ========================================================== */}
         {/*  BLOG                                                      */}
         {/* ========================================================== */}
-        <BlogSection />
+        <BlogSection posts={getBlogSectionPosts()} />
       </main>
       <TickerCTA />
       <Footer />

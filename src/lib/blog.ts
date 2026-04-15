@@ -14,6 +14,7 @@ export interface BlogPost {
   authorRole: string;
   tags: string[];
   gradient: string;
+  image?: string;
   content: string;
 }
 
@@ -37,6 +38,7 @@ export function getAllPosts(): BlogPost[] {
       authorRole: data.authorRole || "Founder, Willard",
       tags: data.tags || [],
       gradient: data.gradient || "from-gray-500 to-gray-400",
+      image: data.image || undefined,
       content,
     };
   });
@@ -50,4 +52,15 @@ export function getAllPosts(): BlogPost[] {
 export function getPostBySlug(slug: string): BlogPost | undefined {
   const posts = getAllPosts();
   return posts.find((p) => p.slug === slug);
+}
+
+export function getBlogSectionPosts(): { title: string; readTime: string; excerpt: string; href: string; gradient: string; image?: string }[] {
+  return getAllPosts().map((post) => ({
+    title: post.title,
+    readTime: post.readTime,
+    excerpt: post.excerpt,
+    href: `/blog/${post.slug}`,
+    gradient: post.gradient,
+    image: post.image,
+  }));
 }

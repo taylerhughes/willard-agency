@@ -128,6 +128,37 @@ function TwoImagesBlock({
   );
 }
 
+function VideoBlock({
+  src,
+  poster,
+}: {
+  src: string;
+  poster?: string;
+  gradient?: string;
+}) {
+  return (
+    <div className="py-4">
+      <div className="px-2 sm:px-6 xl:px-12 2xl:px-20">
+        <div className="px-2 lg:px-3 xl:px-4 w-full">
+          <div className="w-full rounded-2xl overflow-hidden lg:rounded-3xl relative bg-gray-600">
+            <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
+              <video
+                src={src}
+                poster={poster}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function renderBlock(block: ContentBlock, index: number) {
   switch (block.type) {
     case "text":
@@ -151,6 +182,15 @@ function renderBlock(block: ContentBlock, index: number) {
           gradient2={block.gradient2}
           image1={block.image1}
           image2={block.image2}
+        />
+      );
+    case "video":
+      return (
+        <VideoBlock
+          key={index}
+          src={block.src}
+          poster={block.poster}
+          gradient={block.gradient}
         />
       );
   }
@@ -359,7 +399,18 @@ export default function CaseStudyPage({
                   className="relative w-full"
                   style={{ paddingTop: "56.25%" }}
                 >
-                  {caseStudy.heroImage ? (
+                  {caseStudy.heroVideo ? (
+                    <video
+                      className="absolute inset-0 w-full h-full object-cover object-center"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      poster={caseStudy.heroImage}
+                    >
+                      <source src={caseStudy.heroVideo} type="video/mp4" />
+                    </video>
+                  ) : caseStudy.heroImage ? (
                     <img
                       src={caseStudy.heroImage}
                       alt={caseStudy.client}

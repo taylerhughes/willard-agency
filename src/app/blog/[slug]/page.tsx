@@ -104,9 +104,17 @@ export default async function BlogPostPage({
                 className="relative w-full"
                 style={{ paddingTop: "40%" }}
               >
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${post.gradient}`}
-                />
+                {post.image ? (
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                ) : (
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${post.gradient}`}
+                  />
+                )}
               </div>
             </div>
           </div>
