@@ -4,7 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import Button from "./Button";
 
-const SERVICES = [
+interface ServiceItem {
+  name: string;
+  href: string;
+  image?: string;
+  video?: string;
+}
+
+const SERVICES: ServiceItem[] = [
   { name: "Product Design", href: "/services/product-design", image: "/images/websites.jpg" },
   { name: "Brand & Positioning", href: "/services/brand-and-positioning", image: "/images/branding.jpg" },
   { name: "Launch & GTM", href: "/services/launch-and-gtm", image: "/images/seo.jpg" },
