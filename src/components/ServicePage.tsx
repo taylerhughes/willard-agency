@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback } from "react";
 import Link from "next/link";
 import type { ServiceData, FeaturedProject } from "@/content/services";
+import { ALL_CASE_STUDIES } from "@/content/caseStudies";
 import Button from "./Button";
 
 /* ------------------------------------------------------------------ */
@@ -18,6 +19,84 @@ function CheckIcon({ className = "text-white" }: { className?: string }) {
       <path d="M447.9 142.5l-23.2 22L181 395.3l-22 20.8-22-20.8L23.2 287.6 0 265.6l44-46.5 23.2 22L159 328l221.7-210 23.2-22 44 46.5z" />
     </svg>
   );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Dynamic project picker                                             */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Build a list of FeaturedProject items for the carousel.
+ *
+ * 1. Convert every case study in the pool to a FeaturedProject.
+ * 2. If a keyword is provided, prioritise case studies whose tags,
+ *    client name, or industry match (case-insensitive).
+ * 3. Backfill remaining slots from non-matching case studies.
+ * 4. If fewer than `min` results, pad with the service's hardcoded
+ *    featuredWork so the carousel is never empty.
+ */
+function pickFeaturedProjects(
+  keyword: string | undefined,
+  hardcoded: FeaturedProject[],
+  min = 3,
+): FeaturedProject[] {
+  const allCS = Object.values(ALL_CASE_STUDIES);
+
+  const toFeatured = (cs: typeof allCS[number]): FeaturedProject => ({
+    year: cs.year,
+    client: cs.client,
+    title: cs.headline,
+    tags: cs.tags,
+    gradient: cs.heroGradient,
+    href: `/work/${cs.slug}`,
+    image: cs.heroImage,
+    video: cs.heroVideo,
+  });
+
+  if (!keyword) {
+    const projects = allCS.map(toFeatured);
+    if (projects.length >= min) return projects;
+    // Pad with hardcoded, avoiding duplicates by href
+    const seen = new Set(projects.map((p) => p.href));
+    for (const p of hardcoded) {
+      if (!seen.has(p.href)) {
+        projects.push(p);
+        seen.add(p.href);
+      }
+      if (projects.length >= min) break;
+    }
+    return projects;
+  }
+
+  const kw = keyword.toLowerCase();
+  const matches: FeaturedProject[] = [];
+  const rest: FeaturedProject[] = [];
+
+  for (const cs of allCS) {
+    const haystack = [cs.client, cs.industry, ...cs.tags].join(" ").toLowerCase();
+    const fp = toFeatured(cs);
+    if (haystack.includes(kw)) {
+      matches.push(fp);
+    } else {
+      rest.push(fp);
+    }
+  }
+
+  const projects = [...matches, ...rest];
+
+  // If still short, pad with the service's hardcoded projects
+  if (projects.length < min) {
+    const seen = new Set(projects.map((p) => p.href));
+    for (const p of hardcoded) {
+      if (!seen.has(p.href)) {
+        projects.push(p);
+        seen.add(p.href);
+      }
+      if (projects.length >= min) break;
+    }
+  }
+
+  return projects;
 }
 
 /* ------------------------------------------------------------------ */
@@ -38,9 +117,28 @@ function FeaturedWorkCard({ project }: { project: FeaturedProject }) {
                 className="relative overflow-hidden w-full"
                 style={{ paddingTop: "75%" }}
               >
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${project.gradient}`}
-                />
+                {project.video ? (
+                  <video
+                    className="absolute inset-0 w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  >
+                    <source src={project.video} type="video/mp4" />
+                  </video>
+                ) : project.image ? (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${project.gradient}`}
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -80,29 +178,38 @@ function FeaturedWorkCard({ project }: { project: FeaturedProject }) {
 /*  Featured Work Carousel                                             */
 /* ------------------------------------------------------------------ */
 function FeaturedWorkCarousel({
-  projects,
+  hardcodedProjects,
   label,
+  keyword,
 }: {
-  projects: FeaturedProject[];
+  hardcodedProjects: FeaturedProject[];
   label: string;
+  keyword?: string;
 }) {
+  const projects = pickFeaturedProjects(keyword, hardcodedProjects);
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+  const isMouseDown = useRef(false);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     if (!scrollRef.current) return;
-    setIsDragging(true);
+    isMouseDown.current = true;
+    setIsDragging(false);
     setStartX(e.pageX - scrollRef.current.offsetLeft);
     setScrollLeft(scrollRef.current.scrollLeft);
   }, []);
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
-      if (!isDragging || !scrollRef.current) return;
-      e.preventDefault();
+      if (!isMouseDown.current || !scrollRef.current) return;
       const x = e.pageX - scrollRef.current.offsetLeft;
+      const distance = Math.abs(x - startX);
+      if (!isDragging && distance < 5) return;
+      if (!isDragging) setIsDragging(true);
+      e.preventDefault();
       const walk = (x - startX) * 1.5;
       scrollRef.current.scrollLeft = scrollLeft - walk;
     },
@@ -110,8 +217,11 @@ function FeaturedWorkCarousel({
   );
 
   const handleMouseUp = useCallback(() => {
+    isMouseDown.current = false;
     setIsDragging(false);
   }, []);
+
+  if (projects.length === 0) return null;
 
   return (
     <section className="w-full pb-20 lg:pb-24 2xl:pb-32">
@@ -148,7 +258,7 @@ function FeaturedWorkCarousel({
               <div className="flex gap-4 lg:gap-6 pr-4 sm:pr-6 xl:pr-12 2xl:pr-20">
                 {projects.map((project) => (
                   <div
-                    key={project.client}
+                    key={project.href}
                     className={`flex-shrink-0 w-[75vw] sm:w-[55vw] lg:w-[35vw] xl:w-[30vw] ${isDragging ? "pointer-events-none" : ""}`}
                   >
                     <FeaturedWorkCard project={project} />
@@ -224,85 +334,253 @@ export default function ServicePage({ service }: { service: ServiceData }) {
   return (
     <main>
       {/* ============================================================ */}
-      {/*  1. HERO                                                     */}
+      {/*  1. HERO (skipped when introCopy sections are used instead)  */}
       {/* ============================================================ */}
-      <section className="w-full pt-28 pb-16 lg:pt-40 lg:pb-24 xl:pt-48">
-        <div className="px-2 sm:px-6 xl:px-12 2xl:px-20">
-          <div className="w-full flex flex-wrap justify-between">
-            {/* Left — label + capabilities */}
-            <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-5/16 mb-8 lg:mb-0">
-              <div className="inline-flex items-center mb-4">
-                <div className="font-light text-sm lg:text-base text-gray-600">
-                  {service.label}
+      {!service.introCopy && (
+        <section className="w-full pt-28 pb-16 lg:pt-40 lg:pb-24 xl:pt-48">
+          <div className="px-2 sm:px-6 xl:px-12 2xl:px-20">
+            <div className="w-full flex flex-wrap justify-between">
+              {/* Left — label + capabilities */}
+              <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-5/16 mb-8 lg:mb-0">
+                <div className="inline-flex items-center mb-4">
+                  <div className="font-light text-sm lg:text-base text-gray-600">
+                    {service.label}
+                  </div>
+                </div>
+
+                {/* Capabilities checklist — desktop */}
+                <div className="hidden lg:block mt-6">
+                  <div className="text-sm font-light text-gray-400 mb-5">
+                    Our {service.label} Capabilities
+                  </div>
+                  <div className="w-full">
+                    {service.capabilities.map((cap) => (
+                      <div key={cap} className="flex space-x-4 mb-3">
+                        <div className="w-5 h-5 flex-shrink-0 mt-px rounded-full flex items-center justify-center bg-gray-600">
+                          <CheckIcon />
+                        </div>
+                        <div className="leading-snug font-light text-gray-600">
+                          {cap}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Capabilities checklist — desktop */}
-              <div className="hidden lg:block mt-6">
-                <div className="text-sm font-light text-gray-400 mb-5">
-                  Our {service.label} Capabilities
+              {/* Right — headline + description + CTA */}
+              <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-11/16">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl 2xl:text-7xl leading-none tracking-tight text-gray-600 mb-8 text-balance lg:indent-48">
+                  {service.headline}
+                </h1>
+                <div className="flex flex-wrap items-start justify-between gap-8 lg:pl-48">
+                  <p className="text-base xl:text-lg text-gray-400 font-light leading-7 max-w-lg">
+                    {service.description}
+                  </p>
+                  <Button href="/contact" variant="primary">
+                    Pitch us
+                  </Button>
                 </div>
-                <div className="w-full">
-                  {service.capabilities.map((cap) => (
-                    <div key={cap} className="flex space-x-4 mb-3">
-                      <div className="w-5 h-5 flex-shrink-0 mt-px rounded-full flex items-center justify-center bg-gray-600">
-                        <CheckIcon />
+              </div>
+            </div>
+
+            {/* Capabilities — mobile only */}
+            <div className="lg:hidden mt-10 px-2">
+              <div className="text-sm font-light text-gray-400 mb-5">
+                Our {service.label} Capabilities
+              </div>
+              <div className="w-full">
+                {service.capabilities.map((cap) => (
+                  <div key={cap} className="flex space-x-4 mb-3">
+                    <div className="w-5 h-5 flex-shrink-0 mt-px rounded-full flex items-center justify-center bg-gray-600">
+                      <CheckIcon />
+                    </div>
+                    <div className="leading-snug font-light text-gray-600">
+                      {cap}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ============================================================ */}
+      {/*  1b. INTRO COPY (optional — e.g. Shopify page)               */}
+      {/* ============================================================ */}
+      {service.introCopy && service.introCopy.length > 0 && (
+        <section className="px-2 sm:px-6 xl:px-12 2xl:px-20 pt-28 lg:pt-40 xl:pt-48 pb-16 lg:pb-20">
+          <div className="w-full flex flex-wrap justify-between">
+            {/* Left — label + headline */}
+            <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-9/16">
+              <div className="flex flex-col space-y-3 lg:space-y-5 items-start">
+                <div className="inline-flex items-center space-x-2 mt-px">
+                  <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+                  <div className="font-light text-sm lg:text-base text-gray-600">
+                    {service.label}
+                  </div>
+                  {service.labelIcon && (
+                    <div className="w-5 h-5 -mt-1 rounded overflow-hidden">
+                      <img
+                        src={service.labelIcon}
+                        alt={`${service.label} icon`}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                </div>
+                <h2 className="text-2xl lg:text-4xl tracking-tight text-gray-600 leading-none text-balance lg:pr-20">
+                  {service.headline}
+                </h2>
+              </div>
+            </div>
+
+            {/* Right — body copy */}
+            <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-7/16 mt-5 lg:mt-10">
+              <div className="w-full relative">
+                {service.introCopy.map((paragraph, i) => (
+                  <p
+                    key={i}
+                    className="text-base xl:text-lg text-gray-400 font-light leading-7 mb-6"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ============================================================ */}
+      {/*  1c. HIGHLIGHT CAPABILITIES (optional)                       */}
+      {/* ============================================================ */}
+      {service.highlightHeadline && (
+        <section className="w-full py-20 lg:py-24 2xl:py-32">
+          <div className="px-2 sm:px-6 xl:px-12 2xl:px-20">
+            <div className="w-full flex flex-wrap justify-between">
+              {/* Left — label + headline + CTA */}
+              <div className="px-2 lg:px-3 xl:px-4 relative w-full mb-10 lg:mb-0 lg:w-9/16">
+                <div className="flex flex-col space-y-3 lg:space-y-5 items-start">
+                  <div className="inline-flex items-center space-x-2 w-auto lg:absolute lg:top-7 lg:left-4">
+                    <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+                    <div className="font-light text-sm lg:text-base text-gray-600">
+                      {service.label}
+                    </div>
+                  </div>
+                  <h2 className="text-2xl lg:text-4xl tracking-tight text-gray-600 leading-none text-balance lg:indent-48 mb-5">
+                    {service.highlightHeadline}
+                  </h2>
+                  {service.highlightCta && (
+                    <Button href={service.highlightCta.href} variant="primary">
+                      {service.highlightCta.label}
+                    </Button>
+                  )}
+                </div>
+              </div>
+
+              {/* Right — capabilities checklist */}
+              {service.highlightCapabilities && (
+                <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-4/16">
+                  <div className="text-sm font-light text-gray-400 mb-5">
+                    Our {service.label} Capabilities
+                  </div>
+                  <div className="w-full">
+                    {service.highlightCapabilities.map((cap) => (
+                      <div key={cap} className="w-full mb-3">
+                        <div className="flex space-x-5">
+                          <div className="w-5 h-5 flex-shrink-0 mt-px rounded-full flex items-center justify-center bg-gray-600">
+                            <CheckIcon />
+                          </div>
+                          <div className="leading-snug font-light text-gray-600">
+                            {cap}
+                          </div>
+                        </div>
                       </div>
-                      <div className="leading-snug font-light text-gray-600">
-                        {cap}
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ============================================================ */}
+      {/*  1d. FEATURE SECTION — image + benefits (optional)           */}
+      {/* ============================================================ */}
+      {service.featureSection && (
+        <section className="w-full pb-20 lg:pb-24 2xl:pb-32">
+          <div className="px-2 sm:px-6 xl:px-12 2xl:px-20">
+            <div className="w-full flex lg:justify-between flex-col lg:flex-row">
+              {/* Left — image */}
+              <div className="px-2 lg:px-3 xl:px-4 relative w-full mb-10 inline-flex lg:mb-0 lg:w-8/16">
+                <div className="w-full relative aspect-square md:aspect-video lg:pb-0 lg:h-full">
+                  <div className="w-full h-full rounded-2xl overflow-hidden absolute top-0 left-0 bg-gray-50 lg:rounded-3xl">
+                    <img
+                      src={service.featureSection.image}
+                      alt=""
+                      className="object-cover absolute top-0 left-0 w-full h-full"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Right — content */}
+              <div className="px-2 lg:px-3 xl:px-4 inline-flex items-center w-full lg:justify-center lg:w-8/16 lg:py-20">
+                <div className="w-full space-y-8 lg:max-w-xl">
+                  <div className="flex flex-col space-y-3 lg:space-y-5 items-start">
+                    <div className="inline-flex items-center space-x-2">
+                      <div className="bg-gray-600 w-1.5 h-1.5 rounded-full" />
+                      <div className="font-light text-sm lg:text-base text-gray-600">
+                        {service.featureSection.label}
                       </div>
                     </div>
-                  ))}
+                    <h2 className="text-xl md:text-2xl xl:text-3xl tracking-tight text-gray-600 leading-none text-balance">
+                      {service.featureSection.headline}
+                    </h2>
+                  </div>
+
+                  <p className="text-base xl:text-lg text-gray-400 font-light leading-7">
+                    {service.featureSection.description}
+                  </p>
+
+                  <div className="w-full flex flex-wrap">
+                    {service.featureSection.benefits.map((benefit) => (
+                      <div key={benefit} className="w-full mb-3.5">
+                        <div className="flex space-x-5">
+                          <div className="w-5 h-5 flex-shrink-0 mt-px rounded-full flex items-center justify-center bg-primary-500">
+                            <CheckIcon className="text-gray-600" />
+                          </div>
+                          <div className="leading-snug font-light text-gray-600">
+                            {benefit}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Button href={service.featureSection.cta.href} variant="primary">
+                    {service.featureSection.cta.label}
+                  </Button>
                 </div>
               </div>
             </div>
-
-            {/* Right — headline + description + CTA */}
-            <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-11/16">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl 2xl:text-7xl leading-none tracking-tight text-gray-600 mb-8 text-balance lg:indent-48">
-                {service.headline}
-              </h1>
-              <div className="flex flex-wrap items-start justify-between gap-8 lg:pl-48">
-                <p className="text-base xl:text-lg text-gray-400 font-light leading-7 max-w-lg">
-                  {service.description}
-                </p>
-                <Button href="/contact" variant="primary">
-                  Start a project
-                </Button>
-              </div>
-            </div>
           </div>
-
-          {/* Capabilities — mobile only */}
-          <div className="lg:hidden mt-10 px-2">
-            <div className="text-sm font-light text-gray-400 mb-5">
-              Our {service.label} Capabilities
-            </div>
-            <div className="w-full">
-              {service.capabilities.map((cap) => (
-                <div key={cap} className="flex space-x-4 mb-3">
-                  <div className="w-5 h-5 flex-shrink-0 mt-px rounded-full flex items-center justify-center bg-gray-600">
-                    <CheckIcon />
-                  </div>
-                  <div className="leading-snug font-light text-gray-600">
-                    {cap}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ============================================================ */}
       {/*  2. FEATURED WORK CAROUSEL                                   */}
       {/* ============================================================ */}
-      {service.featuredWork.length > 0 && (
-        <FeaturedWorkCarousel
-          projects={service.featuredWork}
-          label={service.label}
-        />
-      )}
+      <FeaturedWorkCarousel
+        hardcodedProjects={service.featuredWork}
+        label={service.label}
+        keyword={service.label}
+      />
 
       {/* ============================================================ */}
       {/*  3. VALUE PROPOSITION — "We're the real sh*t"                */}
@@ -388,7 +666,7 @@ export default function ServicePage({ service }: { service: ServiceData }) {
             </div>
 
             <Button href="/contact" variant="primary">
-              Start a project today
+              Pitch us your startup
             </Button>
           </div>
         </div>

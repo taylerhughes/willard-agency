@@ -43,18 +43,16 @@ const SOCIAL_LINKS = [
 
 const LEARN_LINKS = [
   { label: "About", href: "/about" },
-  { label: "Culture", href: "/culture" },
+  { label: "How we work", href: "/how-we-work" },
   { label: "Testimonials", href: "/testimonials" },
-  { label: "Processes", href: "/processes" },
-  { label: "FAQs", href: "/faqs" },
   { label: "Blog", href: "/blog" },
 ];
 
 const EXPLORE_LINKS = [
   { label: "Home", href: "/" },
   { label: "Work", href: "/work" },
-  { label: "Services", href: "/services" },
-  { label: "Careers", href: "/careers" },
+  { label: "What we do", href: "/services" },
+  { label: "New client onboarding", href: "/onboarding" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -135,7 +133,7 @@ export default function Footer() {
                 href="/contact"
                 className="inline-flex items-center bg-primary-500 text-gray-600 py-2 px-5 rounded-full leading-tight flex-shrink-0 transition-transform hover:scale-105"
               >
-                Start a project
+                Pitch us
                 <svg className="w-3 h-3 fill-current ml-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                   <path d="M328 96h24v288h-48V177.9L81 401l-17 17-33.9-34 17-17 223-223H64V96h264z" />
                 </svg>
@@ -181,14 +179,12 @@ export default function Footer() {
                 </svg>
                 <span className="text-sm md:text-base">hello@willard.agency</span>
               </a>
-              <div className="flex space-x-4 mt-6 mb-1 lg:mb-2">
-                <svg className="w-3 h-3 fill-current text-white mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                  <path d="M192 512s192-208 192-320C384 86 298 0 192 0S0 86 0 192c0 112 192 320 192 320zm0-384a64 64 0 110 128 64 64 0 110-128z" />
+              <a href="tel:+447377883872" className="inline-flex items-center space-x-4 text-white hover:text-gray-100 mt-6 mb-1 lg:mb-2">
+                <svg className="w-3 h-3 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-176.2 176.8l-50.6-62.3c-6.7-8.3-18.2-11-28-6.8l-112 48c-10.7 4.6-16.5 16.2-13.9 27.5l24 104c2.5 10.8 12.2 18.4 23.4 18.4C299.7 512 512 299.7 512 48c0-11.1-7.5-20.9-18.6-23.4z" />
                 </svg>
-                <p className="text-sm md:text-base text-white font-light leading-7">
-                  Willard Agency<br />123 Creative Street<br />Your City, ST 12345
-                </p>
-              </div>
+                <span className="text-sm md:text-base">+44 (0) 7377 883 872</span>
+              </a>
             </div>
           </div>
         </div>
@@ -211,7 +207,7 @@ export default function Footer() {
             </div>
           </div>
           <div className="inline-flex flex-row text-gray-200 w-auto text-xs lg:text-sm">
-            <Link href="/" className="hover:text-white transition-colors">Web Design Agency</Link>
+            <Link href="/" className="hover:text-white transition-colors">Equity Design Studio</Link>
             <div className="mx-2 lg:mx-5">|</div>
             <div>All Rights Reserved</div>
             <div className="mx-2 lg:mx-5">|</div>

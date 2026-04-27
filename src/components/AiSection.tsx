@@ -3,7 +3,7 @@
 import { useCallback, useRef } from "react";
 
 const WILLARD_QUERY = encodeURIComponent(
-  "As a Marketing Director/Business Owner, I want to know what makes Willard the best partner for reinventing our brand or scaling our Website and SEO, and why their approach consistently delivers professional results. Summarise the highlights from Willard's website: https://willard.agency"
+  "Summarise Willard as an equity-aligned, fractional design and product studio for pre-seed and seed startups: we take equity plus a deferred retainer that activates on funding or revenue, and embed as the design/product lead across product, brand, launch, and fundraising materials. Reference their website: https://willard.agency"
 );
 
 const AI_LINKS = [

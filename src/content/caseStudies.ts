@@ -20,6 +20,12 @@ export interface CaseStudyData {
   description: string;
   industry: string;
   duration: string;
+  /** Founder journey framing — stage of the company when we engaged. */
+  stage?: string;
+  /** What we did as the fractional lead. */
+  engagement?: string;
+  /** What the engagement unlocked for the founders. */
+  outcome?: string;
   contentBlocks: ContentBlock[];
 }
 
@@ -27,19 +33,22 @@ const fireside: CaseStudyData = {
   slug: "fireside",
   client: "Fireside",
   year: "2025",
-  tags: ["Web Design", "Development", "Motion Design"],
-  metaTitle: "Fireside | Willard",
+  tags: ["Product Design", "Brand & Positioning", "Launch & GTM"],
+  metaTitle: "Fireside — Founder Story | Willard",
   metaDescription:
-    "Designing and developing an engaging website for Fireside — the first membership community for pediatric dentists.",
-  headline: "Building a community dentists actually want to join",
+    "How Willard embedded as the fractional design lead for Fireside — the first membership community for pediatric dentists — through launch.",
+  headline: "From idea to live community as the fractional design lead",
   heroGradient: "from-orange-100 to-amber-50",
   heroImage: "/images/fireside/cover.avif",
   heroVideo: "/videos/fireside/fireside_landing_01.mp4",
-  subHeadline: "A warm, engaging web presence for a pediatric dentistry community",
+  subHeadline: "A warm, engaging launch surface for a pediatric dentistry community",
   description:
-    "Fireside is the first membership community for pediatric dentists, offering exclusive resources, expert support, and vendor discounts. They needed a website that felt approachable and warm — not clinical — while clearly communicating their value proposition and driving membership sign-ups.",
+    "Fireside is the first membership community for pediatric dentists. We embedded as their fractional design and product lead — shaping the positioning, designing the marketing surface, and shipping a live site that started converting members from day one. Founder-led, senior-only, no account managers.",
   industry: "Healthcare & B2B",
   duration: "8 Weeks",
+  stage: "Pre-seed",
+  engagement: "Fractional design lead, launch phase",
+  outcome: "Shipped to a live membership funnel",
   contentBlocks: [
     {
       type: "video",
@@ -91,18 +100,21 @@ const oriva: CaseStudyData = {
   slug: "oriva",
   client: "Oriva",
   year: "2024",
-  tags: ["Branding", "Shopify", "eCommerce"],
-  metaTitle: "Oriva | Willard",
+  tags: ["Brand & Positioning", "Product Design", "Launch & GTM"],
+  metaTitle: "Oriva — Founder Story | Willard",
   metaDescription:
-    "Designing and building a luxury jewelry eCommerce experience for Oriva — from brand identity to a bespoke Shopify storefront.",
-  headline: "Crafting a luxury jewelry experience online",
+    "Willard as the fractional brand and product partner for Oriva — shaping the identity, product surface, and first storefront pre-revenue.",
+  headline: "Designing a new category before the first customer",
   heroGradient: "from-amber-100 to-amber-50",
   heroImage: "/images/oriva/4f808c241915435.696230f50abaa.webp",
-  subHeadline: "A bespoke Shopify store for timeless craftsmanship",
+  subHeadline: "Brand, product surface, and first storefront for a pre-revenue founder",
   description:
-    "Oriva needed an online presence that matched the quality and elegance of their handcrafted jewelry. We designed and built a premium Shopify storefront from the ground up — from brand identity and art direction to product photography layouts and a seamless checkout experience.",
+    "Oriva came to us with a vision and no customers yet. We embedded as their fractional brand and product partner — shaping the identity, designing the product surface, and shipping a first storefront founders could actually put in front of investors and early customers.",
   industry: "Luxury Jewelry",
   duration: "10 Weeks",
+  stage: "Pre-seed → Seed",
+  engagement: "Fractional brand & product partner",
+  outcome: "First storefront live, first customer conversations opened",
   contentBlocks: [
     {
       type: "fullImage",
@@ -151,19 +163,22 @@ const harvest: CaseStudyData = {
   slug: "harvest",
   client: "MOVA",
   year: "2024",
-  tags: ["Branding", "eCommerce", "Motion Design"],
-  metaTitle: "MOVA Brewery | Willard",
+  tags: ["Brand & Positioning", "Launch & GTM"],
+  metaTitle: "MOVA — Founder Story | Willard",
   metaDescription:
-    "Brand identity, eCommerce design, and motion design for MOVA — a brewery and restaurant translating its in-person energy into a digital experience.",
-  headline: "Translating a brewery's soul into a digital experience",
+    "Willard as the fractional brand lead for MOVA — a brewery category play — shipping a brand and launch surface that walks into retail conversations with authority.",
+  headline: "A brand system built for a category that didn't exist yet",
   heroGradient: "from-amber-950 to-amber-900",
   heroImage: "/images/mova/63e65925962d1c778663d4c1_63e6574fccb11003a47b907b_MOVA_1.avif",
   heroVideo: "/videos/mova/mova_home_1.mp4",
-  subHeadline: "A bilingual eCommerce platform for a brewery with character",
+  subHeadline: "Brand, launch, and the retail-ready story that walked through the door",
   description:
-    "MOVA is a brewery and restaurant that fosters connections between people through its unique culture and atmosphere. They needed a digital presence that authentically captured the energy of their physical space — a bilingual eCommerce site that felt as distinctive as the brand itself.",
+    "MOVA is a brewery and restaurant with a category-defining atmosphere. We embedded as their fractional brand lead — shaping the positioning, shipping the bilingual launch surface, and packaging the story so retail and partnership conversations landed with conviction.",
   industry: "Food & Beverage",
   duration: "12 Weeks",
+  stage: "Seed",
+  engagement: "Fractional brand lead, launch phase",
+  outcome: "Retail-ready brand and launch surface",
   contentBlocks: [
     {
       type: "video",

@@ -476,6 +476,44 @@ export default function CaseStudyPage({
                   </div>
                 </div>
               </div>
+
+              {/* Founder journey strip */}
+              {(caseStudy.stage ||
+                caseStudy.engagement ||
+                caseStudy.outcome) && (
+                <div className="w-full max-w-2xl mt-6 flex flex-wrap justify-between gap-y-3 pr-6 lg:mt-8 lg:pr-0">
+                  {caseStudy.stage && (
+                    <div className="pr-8">
+                      <div className="text-sm text-primary-500 font-light">
+                        Stage
+                      </div>
+                      <div className="text-base lg:text-lg text-gray-600">
+                        {caseStudy.stage}
+                      </div>
+                    </div>
+                  )}
+                  {caseStudy.engagement && (
+                    <div className="pr-8">
+                      <div className="text-sm text-primary-500 font-light">
+                        Engagement
+                      </div>
+                      <div className="text-base lg:text-lg text-gray-600">
+                        {caseStudy.engagement}
+                      </div>
+                    </div>
+                  )}
+                  {caseStudy.outcome && (
+                    <div className="pr-8">
+                      <div className="text-sm text-primary-500 font-light">
+                        Outcome
+                      </div>
+                      <div className="text-base lg:text-lg text-gray-600">
+                        {caseStudy.outcome}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -5,8 +5,9 @@ import Link from "next/link";
 import Button from "./Button";
 
 const NAV_LINKS = [
-  { label: "Services", href: "/services" },
+  { label: "What we do", href: "/services" },
   { label: "Work", href: "/work" },
+  { label: "How we work", href: "/how-we-work" },
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
@@ -135,7 +136,7 @@ export default function Header() {
             {/* Desktop CTA */}
             <div className="hidden lg:inline-flex">
               <Button href="/contact" variant="primary">
-                Start a project
+                Pitch us
               </Button>
             </div>
           </div>
@@ -170,7 +171,7 @@ export default function Header() {
               </ul>
               <div className="w-full mt-6">
                 <Button href="/contact" variant="primary">
-                  Start a project
+                  Pitch us
                 </Button>
               </div>
             </div>

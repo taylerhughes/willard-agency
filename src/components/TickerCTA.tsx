@@ -43,7 +43,7 @@ export default function TickerCTA() {
     return () => cancelAnimationFrame(animRef.current);
   }, []);
 
-  const text = "Let's work together.";
+  const text = "Pitch us your startup.";
 
   return (
     <div className="w-full pb-20 lg:pb-24 2xl:pb-32">

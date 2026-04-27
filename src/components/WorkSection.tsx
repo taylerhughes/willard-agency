@@ -1,39 +1,77 @@
 import Link from "next/link";
 import Button from "./Button";
+import { ALL_CASE_STUDIES, type CaseStudyData } from "@/content/caseStudies";
+
+/* ------------------------------------------------------------------ */
+/*  Helpers                                                            */
+/* ------------------------------------------------------------------ */
 
 interface Project {
   year: string;
   client: string;
   title: string;
   tags: string[];
-  image: string; // placeholder gradient color
-  video?: string; // optional video src
+  image: string;
+  video?: string;
   href: string;
 }
 
-const PROJECTS_LEFT: Project[] = [
-  {
-    year: "2025",
-    client: "Fireside",
-    title: "Building a community dentists actually want to join",
-    tags: ["Web Design", "Development", "Motion Design"],
-    image: "from-orange-100 to-amber-50",
-    video: "/videos/fireside/fireside_landing_01.mp4",
-    href: "/work/fireside",
-  },
-];
+/** Convert a CaseStudyData entry into the shape the card needs. */
+function toProject(cs: CaseStudyData): Project {
+  return {
+    year: cs.year,
+    client: cs.client,
+    title: cs.headline,
+    tags: cs.tags,
+    image: cs.heroGradient,
+    video: cs.heroVideo,
+    href: `/work/${cs.slug}`,
+  };
+}
 
-const PROJECTS_RIGHT: Project[] = [
-  {
-    year: "2024",
-    client: "MOVA",
-    title: "Translating a brewery's soul into a digital experience",
-    tags: ["Branding", "eCommerce", "Motion Design"],
-    image: "from-amber-950 to-amber-900",
-    video: "/videos/mova/mova_home_1.mp4",
-    href: "/work/harvest",
-  },
-];
+/**
+ * Pick `count` case studies from the pool.
+ *
+ * - If `keyword` is provided, case studies whose tags, client name, or
+ *   industry match (case-insensitive) are prioritised.
+ * - Remaining slots are filled from the rest of the pool so the section
+ *   always shows the requested number of items (or as many as exist).
+ */
+function pickProjects(count: number, keyword?: string): Project[] {
+  const all = Object.values(ALL_CASE_STUDIES);
+
+  if (!keyword) {
+    return all.slice(0, count).map(toProject);
+  }
+
+  const kw = keyword.toLowerCase();
+
+  const matches: CaseStudyData[] = [];
+  const rest: CaseStudyData[] = [];
+
+  for (const cs of all) {
+    const haystack = [
+      cs.client,
+      cs.industry,
+      ...cs.tags,
+    ]
+      .join(" ")
+      .toLowerCase();
+
+    if (haystack.includes(kw)) {
+      matches.push(cs);
+    } else {
+      rest.push(cs);
+    }
+  }
+
+  // Prioritised matches first, then backfill from the rest
+  return [...matches, ...rest].slice(0, count).map(toProject);
+}
+
+/* ------------------------------------------------------------------ */
+/*  ProjectCard                                                        */
+/* ------------------------------------------------------------------ */
 
 function ProjectCard({ project }: { project: Project }) {
   return (
@@ -96,7 +134,24 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
-export default function WorkSection() {
+/* ------------------------------------------------------------------ */
+/*  WorkSection                                                        */
+/* ------------------------------------------------------------------ */
+
+interface WorkSectionProps {
+  /** Optional keyword to prioritise matching case studies (matches tags, client, industry). */
+  keyword?: string;
+  /** Total number of case studies to show (default: 2). */
+  count?: number;
+}
+
+export default function WorkSection({ keyword, count = 2 }: WorkSectionProps) {
+  const projects = pickProjects(count, keyword);
+
+  // Split into two columns for the masonry layout
+  const leftProjects = projects.filter((_, i) => i % 2 === 0);
+  const rightProjects = projects.filter((_, i) => i % 2 === 1);
+
   return (
     <div className="w-full pb-20 lg:pb-24 2xl:pb-32">
       <div className="px-2 sm:px-6 xl:px-12 2xl:px-20">
@@ -115,9 +170,9 @@ export default function WorkSection() {
             </div>
           </div>
 
-          {/* Left column — starts at normal position, offset up on mobile */}
+          {/* Left column */}
           <div className="px-2 lg:px-3 xl:px-4 w-full md:w-8/16 md:mt-20">
-            {PROJECTS_LEFT.map((project) => (
+            {leftProjects.map((project) => (
               <ProjectCard key={project.client} project={project} />
             ))}
 
@@ -136,7 +191,7 @@ export default function WorkSection() {
             </div>
           </div>
 
-          {/* Right column — starts with header on desktop */}
+          {/* Right column */}
           <div className="px-2 lg:px-3 xl:px-4 w-full md:w-8/16">
             {/* Section header — desktop only */}
             <div className="w-full justify-center mb-16 hidden lg:flex lg:mb-20">
@@ -152,7 +207,7 @@ export default function WorkSection() {
               </div>
             </div>
 
-            {PROJECTS_RIGHT.map((project) => (
+            {rightProjects.map((project) => (
               <ProjectCard key={project.client} project={project} />
             ))}
 

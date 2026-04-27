@@ -9,9 +9,9 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Willard | Web Design & Branding Agency",
+  title: "Willard | Equity Design Studio for Early-Stage Founders",
   description:
-    "An award-winning web design and branding agency specialising in Web Design, Branding, eCommerce and SEO.",
+    "Willard is a fractional design and product studio for pre-seed and seed startups. We trade equity for product, brand, and GTM work that helps founders ship, fundraise, and earn revenue.",
   icons: {
     icon: "/favicon.svg",
   },

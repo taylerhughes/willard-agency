@@ -68,9 +68,9 @@ export default function Hero() {
               <div className="w-full bg-white">
                 <div className="inline-flex items-center space-x-2 relative z-20 mb-3 px-3 mt-px lg:px-6">
                   <div className="font-light text-sm lg:text-base text-gray-600">
-                    Hiya, we&apos;re Willard
+                    An equity-aligned design studio
                   </div>
-                  <div className="inline-flex origin-bottom-right">👋</div>
+                  <div className="inline-flex origin-bottom-right">🤝</div>
                 </div>
               </div>
 
@@ -83,15 +83,15 @@ export default function Hero() {
                   <div className="relative">
                     <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl 2xl:text-8xl leading-none tracking-tight text-gray-600 bg-white pt-16 pb-3 gooey-content">
                       <span className="flex-shrink-0 truncate inline relative pl-3 lg:pl-5" style={{ zIndex: 2 }}>
-                        A web design and&nbsp;&nbsp;
+                        The design partner&nbsp;&nbsp;
                         <br />
                       </span>
                       <span className="flex-shrink-0 truncate inline relative pl-3 lg:pl-5" style={{ zIndex: 1 }}>
-                        branding agency&nbsp;&nbsp;
+                        for your first&nbsp;&nbsp;
                         <br />
                       </span>
                       <span className="flex-shrink-0 truncate inline relative pl-3 lg:pl-5" style={{ zIndex: 0 }}>
-                        that delivers&nbsp;&nbsp;
+                        $0 → $1M.&nbsp;&nbsp;
                         <br />
                       </span>
                     </h1>
@@ -126,12 +126,12 @@ export default function Hero() {
                 <div className="flex flex-col space-y-3 lg:flex-row lg:space-y-0 lg:space-x-7">
                   <div>
                     <Button href="/work" variant="dark">
-                      View our work
+                      See founder stories
                     </Button>
                   </div>
                   <div className="hidden lg:inline-flex">
-                    <Button href="/about" variant="text" showArrow={true}>
-                      Meet the team
+                    <Button href="/how-we-work" variant="text" showArrow={true}>
+                      How we work
                     </Button>
                   </div>
                 </div>

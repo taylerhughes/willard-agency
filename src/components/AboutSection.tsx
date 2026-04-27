@@ -62,9 +62,10 @@ export default function AboutSection() {
             {/* Right content */}
             <div className="px-2 lg:px-3 xl:px-4 flex flex-col items-start space-y-8 w-full lg:w-11/16">
               <h2 className="text-2xl md:text-[4vw] xl:text-[3vw] tracking-tight text-gray-600 leading-none text-balance lg:indent-48">
-                An independent web design and branding agency set up in 2012 who
-                care, build relationships, have industry experience, and win
-                awards.
+                An equity-aligned design studio for early-stage founders. We
+                work as a fractional design and product lead — trading cash for
+                equity, and activating a working retainer when you raise or
+                start earning revenue.
               </h2>
               <div className="flex flex-wrap items-center gap-4">
                 <div className="mr-1 lg:mr-4">

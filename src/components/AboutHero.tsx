@@ -12,28 +12,58 @@ const IMAGES = [
   "/images/aboutus/photo-1603195827187-459ab02554a0.avif",
 ];
 
-// Each image is positioned at a rotation angle around the arc
-const ANGLES = [-7, 5, 17, 29, 41, 53, 65, 77, 89];
+// Space images 12 degrees apart around the full 360° so there's always
+// something visible no matter how far the arc has rotated.
+const STEP = 12;
+const SLOT_COUNT = Math.ceil(360 / STEP); // 30 slots
+
+const BASE_SPEED = 0.015; // degrees per frame when idle
+const SCROLL_MULTIPLIER = 0.005; // how much scroll velocity affects rotation speed
+const DAMPING = 0.95; // how quickly scroll boost decays back to base speed
 
 export default function AboutHero() {
   const arcRef = useRef<HTMLDivElement>(null);
   const animRef = useRef<number>(0);
   const rotRef = useRef(0);
+  const scrollBoost = useRef(0);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
+    lastScrollY.current = window.scrollY;
+
+    function handleScroll() {
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY.current;
+      lastScrollY.current = currentY;
+      // Add scroll velocity as a boost (scrolling down = faster rotation)
+      scrollBoost.current += delta * SCROLL_MULTIPLIER;
+    }
+
     function animate() {
-      rotRef.current -= 0.015; // slow continuous rotation
+      // Decay the scroll boost toward zero
+      scrollBoost.current *= DAMPING;
+      // Combine base speed with scroll boost
+      const speed = BASE_SPEED + scrollBoost.current;
+      rotRef.current -= speed;
       if (arcRef.current) {
         arcRef.current.style.transform = `rotate(${rotRef.current}deg)`;
       }
       animRef.current = requestAnimationFrame(animate);
     }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     animRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animRef.current);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(animRef.current);
+    };
   }, []);
 
-  // Double images to fill the arc
-  const arcImages = [...IMAGES, ...IMAGES].slice(0, ANGLES.length);
+  // Fill all 360° with images by cycling through the source array
+  const arcImages = Array.from({ length: SLOT_COUNT }, (_, i) => ({
+    src: IMAGES[i % IMAGES.length],
+    angle: i * STEP,
+  }));
 
   return (
     <section className="w-full pt-20 lg:pt-32 xl:pt-40 relative mb-10 lg:mb-20 h-[90vh] min-h-[700px] max-h-[1000px]">
@@ -58,13 +88,13 @@ export default function AboutHero() {
             marginLeft: "-75vw",
           }}
         >
-          {arcImages.map((src, i) => (
+          {arcImages.map(({ src, angle }, i) => (
             <div
               key={i}
               className="absolute top-0 left-1/2 h-1/2 origin-bottom-left"
               style={{
                 width: "20vw",
-                transform: `rotate(${ANGLES[i]}deg) translateX(-50%)`,
+                transform: `rotate(${angle}deg) translateX(-50%)`,
               }}
             >
               <div className="relative overflow-hidden w-full" style={{ paddingTop: "100%" }}>

@@ -60,23 +60,30 @@ export default function BlogSection({ posts }: { posts: BlogSectionPost[] }) {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+  const isMouseDown = useRef(false);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     if (!scrollRef.current) return;
-    setIsDragging(true);
+    isMouseDown.current = true;
+    setIsDragging(false);
     setStartX(e.pageX - scrollRef.current.offsetLeft);
     setScrollLeft(scrollRef.current.scrollLeft);
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!isDragging || !scrollRef.current) return;
-    e.preventDefault();
+    if (!isMouseDown.current || !scrollRef.current) return;
     const x = e.pageX - scrollRef.current.offsetLeft;
+    const distance = Math.abs(x - startX);
+    // Only start dragging after moving more than 5px — allows normal clicks
+    if (!isDragging && distance < 5) return;
+    if (!isDragging) setIsDragging(true);
+    e.preventDefault();
     const walk = (x - startX) * 1.5;
     scrollRef.current.scrollLeft = scrollLeft - walk;
   }, [isDragging, startX, scrollLeft]);
 
   const handleMouseUp = useCallback(() => {
+    isMouseDown.current = false;
     setIsDragging(false);
   }, []);
 

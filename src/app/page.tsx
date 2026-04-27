@@ -33,22 +33,23 @@ export default function Home() {
                   </div>
                 </div>
                 <h2 className="text-2xl md:text-3xl xl:text-4xl tracking-tight text-gray-600 leading-none mb-3 text-balance lg:pr-16">
-                  A web design agency that cares about you and your brand, no
-                  matter the size or what industry your business is in.
+                  A design partner for founders at the earliest, scrappiest
+                  stage of the journey.
                 </h2>
               </div>
             </div>
             <div className="w-full lg:w-7/16">
               <div className="w-full relative mb-10 xl:pr-10">
                 <p className="text-base xl:text-lg text-gray-400 font-light leading-7 mb-6">
-                  Willard is a digital agency with expertise in web design,
-                  branding, eCommerce, and SEO. We help businesses grow their
-                  online presence with thoughtful design and strategic thinking.
+                  Willard is an equity-aligned design studio. We embed as your
+                  fractional design and product lead — taking equity up front,
+                  with a retainer that activates when you raise funding or
+                  start earning revenue.
                 </p>
                 <p className="text-base xl:text-lg text-gray-400 font-light leading-7 mb-6">
-                  Whether you need a complete rebrand, a new website, or help
-                  with your digital marketing strategy, we have the experience
-                  and passion to deliver results that matter.
+                  Product, brand, launch, and fundraising materials — one
+                  partner across the whole surface, from first pixel to pitch
+                  deck.
                 </p>
               </div>
               <Button href="/about" variant="primary">

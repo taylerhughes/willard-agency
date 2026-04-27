@@ -5,11 +5,10 @@ import Link from "next/link";
 import Button from "./Button";
 
 const SERVICES = [
-  { name: "Brand Identity", href: "/services/branding", image: "/images/branding.jpg" },
-  { name: "Websites", href: "/services/web-design", image: "/images/websites.jpg" },
-  { name: "SEO", href: "/services/seo", image: "/images/seo.jpg" },
-  { name: "eCommerce", href: "/services/ecommerce", video: "/videos/ecommerce.mp4" },
-  { name: "Shopify", href: "/services/shopify", image: "/images/shopify.webp" },
+  { name: "Product Design", href: "/services/product-design", image: "/images/websites.jpg" },
+  { name: "Brand & Positioning", href: "/services/brand-and-positioning", image: "/images/branding.jpg" },
+  { name: "Launch & GTM", href: "/services/launch-and-gtm", image: "/images/seo.jpg" },
+  { name: "Fundraising-Ready", href: "/services/fundraising-materials", image: "/images/shopify.webp" },
 ];
 
 export default function ServicesSection() {
@@ -32,16 +31,16 @@ export default function ServicesSection() {
               <div className="flex flex-wrap w-full lg:w-11/16">
                 <div className="px-2 lg:px-3 xl:px-4 w-full mb-5 lg:mb-0 lg:w-9/16 xl:w-10/16">
                   <h2 className="text-2xl md:text-3xl xl:text-4xl tracking-tight text-white leading-none text-balance max-w-xl xl:indent-32">
-                    How we take your business to the next level
+                    How we help you get to your next round.
                   </h2>
                 </div>
                 <div className="px-2 lg:px-3 xl:px-4 w-full sm:w-10/16 lg:w-7/16 xl:w-6/16">
                   <p className="text-base xl:text-lg text-white font-light leading-7 mb-6 opacity-70">
-                    We are a digital agency with expertise, and we&apos;re on a
-                    mission to help you take the next step in your business.
+                    Four capabilities, one embedded partner — from first pixel
+                    to pitch deck.
                   </p>
                   <Button href="/services" variant="primary">
-                    See all services
+                    See what we do
                   </Button>
                 </div>
               </div>

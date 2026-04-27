@@ -71,22 +71,22 @@ export default function AboutPage() {
                 </div>
               </div>
               <h2 className="text-2xl md:text-3xl xl:text-4xl tracking-tight text-gray-600 leading-none text-balance mb-5">
-                Expert designers &amp; developers you can trust.
+                An equity-aligned design studio for founders at zero.
               </h2>
             </div>
             <div className="px-2 lg:px-3 xl:px-4 w-full lg:w-10/16">
               <p className="text-base xl:text-lg text-gray-400 font-light leading-7 mb-6 max-w-2xl">
-                Willard is a small, focused digital agency. We specialise in
-                brand identity, web design, eCommerce, and SEO &mdash; working
-                with businesses of all sizes, from startups to established
-                brands looking to level up their digital presence.
+                Willard is a fractional design and product studio built for
+                pre-seed and seed startups. We trade equity for the design,
+                brand, and GTM work that gets you to a first round or first
+                dollar &mdash; then activate a working retainer once you get
+                there.
               </p>
               <p className="text-base xl:text-lg text-gray-400 font-light leading-7 mb-8 max-w-2xl">
-                We keep our team small on purpose. It means every client gets
-                senior-level attention, and every project is led by people who
-                genuinely care about the outcome. No account managers, no
-                juniors learning on your budget &mdash; just experienced
-                designers and developers doing what they do best.
+                You get a senior partner embedded in your team &mdash; not a
+                rotating cast of account managers. One person sits next to the
+                founders, ships the work, and stays accountable for the
+                outcome.
               </p>
               <Button href="/work" variant="primary">
                 See our work
@@ -268,13 +268,17 @@ export default function AboutPage() {
                     get the best results for everyone.
                   </p>
                   <div className="flex items-center gap-3 mt-5">
-                    <div className="w-9 h-9 lg:w-11 lg:h-11 rounded-lg bg-gray-600 flex items-center justify-center text-white text-sm">
-                      AC
+                    <div className="w-9 h-9 lg:w-11 lg:h-11 rounded-lg overflow-hidden flex-shrink-0">
+                      <img
+                        src="/founder.jpeg"
+                        alt="Tayler Hughes"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div className="leading-tight">
-                      <div className="text-sm text-gray-600">Alex Carter</div>
+                      <div className="text-sm text-gray-600">Tayler Hughes</div>
                       <div className="text-xs text-gray-400 font-light">
-                        Co-Founder
+                        Founder
                       </div>
                     </div>
                   </div>
@@ -346,8 +350,7 @@ export default function AboutPage() {
                 </div>
               </div>
               <h2 className="text-2xl md:text-3xl xl:text-4xl tracking-tight text-gray-600 leading-none text-balance max-w-2xl">
-                We work with start-up businesses through to global
-                organisations.
+                We work with founders from day zero through to first revenue.
               </h2>
             </div>
             <div className="px-2 lg:px-3 xl:px-4 flex-shrink-0">

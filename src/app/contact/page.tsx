@@ -118,24 +118,11 @@ export default function ContactPage() {
                     Call us
                   </div>
                   <a
-                    href="tel:+441234567890"
+                    href="tel:+447377883872"
                     className="text-lg lg:text-xl text-gray-600 tracking-tight hover:text-primary-600 transition-colors"
                   >
-                    +44 1234 567 890
+                    +44 (0) 7377 883 872
                   </a>
-                </div>
-
-                <div className="mb-8">
-                  <div className="text-sm text-gray-300 font-light mb-2">
-                    Visit us
-                  </div>
-                  <p className="text-base text-gray-400 font-light leading-7">
-                    Willard Agency
-                    <br />
-                    123 Creative Street
-                    <br />
-                    Your City, ST 12345
-                  </p>
                 </div>
 
                 <div>
